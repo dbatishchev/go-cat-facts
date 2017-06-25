@@ -5,7 +5,6 @@ import (
 	"net/http/httptest"
 	"testing"
 	"fmt"
-	"errors"
 )
 
 func TestMakeRequest(t *testing.T) {
@@ -18,11 +17,11 @@ func TestMakeRequest(t *testing.T) {
 	result, err := makeRequest(ts.URL)
 
 	if err != nil {
-		fmt.Errorf("Failed fetch response from API: %v", err)
+		t.Errorf("Failed fetch response from API: %v", err)
 	}
 
 	if len(result) == 0 {
-		errors.New("Empty response from API")
+		t.Error("Empty response from API")
 	}
 }
 
@@ -30,10 +29,10 @@ func TestGetFactFromJSON(t *testing.T) {
 	fact, err := getFactFromJSON([]byte(`{"facts": ["fact1", "fact2"]}`))
 
 	if err != nil {
-		fmt.Errorf("Failed to decode response JSON: %v", err)
+		t.Errorf("Failed to decode response JSON: %v", err)
 	}
 
 	if len(fact) == 0 {
-		errors.New("Failed to decode response JSON")
+		t.Error("Failed to decode response JSON")
 	}
 }

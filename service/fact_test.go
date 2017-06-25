@@ -18,10 +18,10 @@ func TestGetFact(t *testing.T) {
 	fact, err := GetFact()
 
 	if err != nil {
-		fmt.Errorf("Failed to get cat fact: %v", err)
+		t.Errorf("Failed to get cat fact: %v", err)
 	}
 
 	if len(fact) == 0 {
-		errors.New("Failed to get cat fact")
+		t.Error("Failed to get cat fact")
 	}
 }
